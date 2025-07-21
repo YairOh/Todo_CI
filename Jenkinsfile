@@ -14,12 +14,16 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
+                 dir('Project/app') {
                  sh "docker build -t ${IMAGE_NAME} ."
                 }
             }
+        }
         stage('Run Tests') {
             steps {
+                dir('Project/app') {
                 sh "docker run --rm ${IMAGE_NAME} pytest"
+            }
             }
         }
         stage('Push Docker Image') {
