@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: pink;
+        }
+        .task-container {
+            display: inline-block;
+            width: 100%;
+            text-align: right;
+        }
+        .task-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .task-form input {
+            margin: 0 5px;
+            padding: 10px;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+        .task-details {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .red { background-color: #ffcccc; }
+        .orange { background-color: #fff2cc; }
+        .green { background-color: #ccffcc; }
+        .white { background-color: white; }
+        p {text-align: center;}
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+
+    <form method="POST" class="task-form">
+        <input type="text" name="task" placeholder="Enter new task" required>
+        <input type="date" name="deadline">
+        <input type="submit" value="Add">
+    </form>
+
+    <div class="task-container">
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task-item {{ task.status_color() }}">
+                    <div class="task-details">
+                        <span>{{ task.description }}</span>
+                        {% if task.deadline %}
+                            <span style="margin-right: 10px; color: gray;">
+                                (Due: {{ task.deadline.strftime('%d/%m/%Y') }}, 
+                                {{ task.days_until_deadline() }} days left)
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="task-actions">
+                        <form method="POST" style="display: inline;">
+                            <input type="hidden" name="complete" value="{{ task.id }}">
+                            <input type="submit" value="✓" title="Mark as done/undone">
+                        </form>
+                        <form method="POST" style="display: inline;">
+                            <input type="hidden" name="delete" value="{{ task.id }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No tasks</p>
+        {% endif %}
+    </div>
+</body>
+</html>
