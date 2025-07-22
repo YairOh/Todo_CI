@@ -10,7 +10,6 @@ ENV DB_NAME=todo_list
 RUN apt-get update && apt-get install -y \
     wget curl gnupg2 fonts-liberation unzip \
     chromium-driver \
-    google-chrom-stable \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
