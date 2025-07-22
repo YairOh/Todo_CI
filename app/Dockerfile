@@ -16,7 +16,7 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . /app
+COPY . .
 
 # Expose port 5000 for the Flask app
 EXPOSE 5000
