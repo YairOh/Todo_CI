@@ -6,6 +6,13 @@ ENV DB_USER=root
 ENV DB_PASSWORD=password
 ENV DB_NAME=todo_list
 
+# install chrome-driver
+RUN apt-get update && apt-get istall -y \
+    wget curl gnupg2 fonts-liberation unzip \
+    chromium-driver \
+    google-chrom-stable \
+    && rm -rf /var/lib/apt/lists/*
+
 # Set the working directory in the container
 WORKDIR /app
 
