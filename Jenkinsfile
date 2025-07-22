@@ -22,7 +22,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('app') {
-                sh "docker run --rm ${IMAGE_NAME} pytest"
+                sh "docker run --rm ${IMAGE_NAME} pytest tests/"
+                }
             }
             }
         }
