@@ -7,7 +7,7 @@ ENV DB_PASSWORD=password
 ENV DB_NAME=todo_list
 
 # install chrome-driver
-RUN apt-get update && apt-get istall -y \
+RUN apt-get update && apt-get install -y \
     wget curl gnupg2 fonts-liberation unzip \
     chromium-driver \
     google-chrom-stable \
